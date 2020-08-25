@@ -34,6 +34,11 @@ To map a port of the host with a port of the container we can use the parameter 
 ```sh
 docker container run -p 8080:80 ContainerName
 ```
+### --entrypoint parameter
+This flag override the existing entrypoint set in an image
+```sh
+docker container run -it --entrypoint /bin/sh ContainerName
+```
 
 ## Check status of containers
 Check only the status of the running containers

@@ -1,4 +1,6 @@
 
 - [Introduction](introduction.md)
 - [Why use Docker?](why.md)
-- [Basic containers management](basic_commands.md)
+- [Docker architecture](architecture.md)
+- [Containers management cmds](basic_commands.md)
+- [Image management (Dockerfiles and other)](images.md)
