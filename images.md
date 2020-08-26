@@ -8,11 +8,10 @@ filesystem with respect to the underlying layers. Docker uses a [Union filesyste
 The layers of a container image are all immutable, the only possible operation affecting the layer is its
 physical deletion.
 Example of a custom layered image:
-<ol reversed>
-  <li>Add static files</li>
-  <li>Add Nginx</li>
-  <li>Ubuntu Linux</li>
-</ol>
+1. Ubuntu Linux
+2. Add Nginx
+3. Add static files
+
 Each layer only contains the delta of changes in regard to the previous set of layers. The
 content of each layer is mapped to a special folder on the host system, which is usually a
 subfolder of `/var/lib/docker`.
@@ -26,6 +25,17 @@ strategy for sharing and copying files for maximum efficiency. If a layer uses a
 that is available in one of the low-lying layers, then it just uses it. If, on the other hand, a
 layer wants to modify, say, a file from a low-lying layer, then it first copies this file up to
 the target layer and then modifies it.
+
+## How build process works?!
+It starts with the base image. From this base image,
+once downloaded into the local cache, the builder creates a container and runs the first
+statement of the Dockerfile inside this container. Then, it stops the container and persists
+the changes made in the container into a new image layer. The builder then creates a new
+container from the base image and the new layer and runs the second statement inside this
+new container. Once again, the result is committed to a new layer. This process is repeated
+until the very last statement in the Dockerfile is encountered. After having committed the
+last layer of the new image, the builder creates an ID for this image and tags the image with
+the name we provided in the build command,
 
 # Create an Image
 ## Method 1: Interactive Image Creation
@@ -118,3 +128,34 @@ Alternatively, one can also use what's called the shell form, as shown here:
 ```
 CMD command param1 param2
 ```
+ 
+NB = The multi-steps builds used by Docker is useful because we can use temporary containers as dev env and pass the content to the next container like in this Dockerfile:
+```
+FROM alpine:3.7 AS build
+RUN apk update && \
+apk add --update alpine-sdk
+RUN mkdir /app
+WORKDIR /app
+COPY . /app
+RUN mkdir bin
+RUN gcc hello.c -o bin/hello
+
+FROM alpine:3.7
+COPY --from=build /app/bin/hello /app/hello
+CMD /app/hello
+```
+NB2 = When we're rebuilding a previously built image, the only layers that are rebuilt are the ones
+that have changed
+
+## Method 3: Import or load from a file
+A
+container image is nothing more than a tarball(`.tar` file).
+So we can export an existing image:
+```sh
+docker image save -o ./backup/my-ubuntu.tar my-ubuntu
+``` 
+Or we can have an existing tarball and want to import it as an image
+```sh
+docker image load -i ./backup/my-ubuntu.tar
+```
+
