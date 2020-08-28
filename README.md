@@ -4,4 +4,4 @@
 - [Docker architecture](architecture.md)
 - [Containers management cmds](basic_commands.md)
 - [Image management (Dockerfiles and other)](images.md)
-     - [Containerizing a legacy app](containerizing_leg_app.md)
+- [Data Volumes (Stateful container)](data_volumes.md)

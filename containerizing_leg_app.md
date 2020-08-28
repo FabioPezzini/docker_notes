@@ -1,1 +1,0 @@
-It is possible also create Docker images for existing legacy applications, and thus run them in a container.

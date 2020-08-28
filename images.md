@@ -128,7 +128,16 @@ Alternatively, one can also use what's called the shell form, as shown here:
 ```
 CMD command param1 param2
 ```
- 
+### ENV keyword
+It is use to provide environment variables
+```
+ENV foo=123
+```
+### EXPOSE keyword
+It declare all ports that the application is listening on and that need to be accessible from outside.
+```
+EXPOSE 18181/tcp
+```
 NB = The multi-steps builds used by Docker is useful because we can use temporary containers as dev env and pass the content to the next container like in this Dockerfile:
 ```
 FROM alpine:3.7 AS build
@@ -159,3 +168,33 @@ Or we can have an existing tarball and want to import it as an image
 docker image load -i ./backup/my-ubuntu.tar
 ```
 
+# Shipping Images
+This process occurs when we have to ship the image through the various stages of the software delivery pipeline.
+The fist step is give the image a globally unique name (`tag`) and pull to an `image registries` (by default the Docker env use Docker Hub).
+
+
+A tag is used to version images, if we don't specify the tag, then Docker automaticcaly assumes we're referring to the `latest` tag.
+```
+docker image pull my-ubuntu:3.5
+```
+
+In general the way to define an image is by its fully qualified name like:
+`<registry URL>/<User or Org>/<name>:<tag>` 
+
+NB = If we omit the registry URL, the Docker Hub is automaticall taken.
+
+
+Now we want to actually share
+or ship our images to a target environment and suppose to use Docker Hub:
+1. We have to tag the image
+```sh
+docker image tag my-ubuntu:latest accountid/my-ubuntu:1.0
+```
+2. We have to login
+```sh
+docker login -u accountid -p mypass
+```
+3. Now we can push the image
+```sh
+docker image push accountid/my-ubuntu:1.0
+```
