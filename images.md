@@ -205,3 +205,9 @@ docker login -u accountid -p mypass
 ```sh
 docker image push accountid/my-ubuntu:1.0
 ```
+
+## Delete Images
+According to Docker, dangling images are layers that have no relationship to any tagged images. Such image layers are certainly useless to us and can quickly fill up our disk.
+```sh
+docker image prune ImageName
+```

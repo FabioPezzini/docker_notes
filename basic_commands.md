@@ -151,3 +151,9 @@ docker container logs -f ContainerName
 docker container run --log-driver none
 ```
 
+## Delete container
+Stopped containers can waste precious resources, you should remove them.
+```sh
+docker container prune ContainerName
+```
+

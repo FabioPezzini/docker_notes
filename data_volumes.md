@@ -59,3 +59,9 @@ docker container run -d --name my-site -v $(pwd):/usr/share/nginx/html -p 8080:8
 ```
 You can make as many changes in your web files and always immediately see the result in the browser, without having to rebuild the image and restart the container containing your website.
 It is important to note that the updates are now propagated bi-directionally. If you make changes on the host, they will be propagated to the container, and viceversa.
+
+## Delete volume
+Unused Docker volumes can waste precious resources, you should remove them.
+```sh
+docker volume prune volumeName
+```
