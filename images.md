@@ -153,6 +153,13 @@ FROM alpine:3.7
 COPY --from=build /app/bin/hello /app/hello
 CMD /app/hello
 ```
+### VOLUME keyword
+Some applications, such as databases running in containers, need to persist their data beyond the lifetime of the container. In this case, they can use volumes.
+In this case we define three volumes as a comma-separated list (when the container is started Docker create the volume and mounts it to the corresponding target folder)
+```
+VOLUME /app/data, /app/profiles, /app/config
+```
+
 NB2 = When we're rebuilding a previously built image, the only layers that are rebuilt are the ones
 that have changed
 

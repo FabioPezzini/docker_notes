@@ -35,3 +35,27 @@ cd /data
 echo "Insert data" > data.txt
 exit
 ```
+Now every data contained in the `/data` folder will persist even if the container is deleted, the only thing to do is attach it to another container to use its content.
+
+## Removing data volume
+It is important to remember that removing a volume destroys the containing data irreversibly.
+```sh
+docker volume rm example
+```
+
+## Sharing data between containers
+As always when multiple applications or processes concurrently access data, we have to be very careful to avoid inconsistencies. To avoid concurrency problems such as race conditions, we ideally have only one application or process that is creating or modifying
+data, while all other processes concurrently accessing this data only read it. We can enforce a process running in a container to only be able to read the data in a volume by mounting this volume as read-only.
+We have to set one of the two containers as read-only (`ro`)
+```sh
+docker container run -it --name reader -v example-data:/app/data:ro ubuntu:19.04 /bin/bash
+```
+
+## Creating Host volume
+In certain scenarios,it is very useful to use volumes that mount a specific host folder (to consume the data used by the host, for example creating a web server with nginx and changing the content of a HTML file by the host side or in a dev environment).
+Can be achieved using the (`pwd`) that point to the current host location (or we can set the absolute path of the host location that we want to synchronize)
+```sh
+docker container run -d --name my-site -v $(pwd):/usr/share/nginx/html -p 8080:80 my-website:1.0
+```
+You can make as many changes in your web files and always immediately see the result in the browser, without having to rebuild the image and restart the container containing your website.
+It is important to note that the updates are now propagated bi-directionally. If you make changes on the host, they will be propagated to the container, and viceversa.
