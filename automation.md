@@ -1,4 +1,3 @@
-## Docker to power CI/CD pipeline (with Jenkins)
 We wanna build a CI/CD pipeline like [this](https://prnt.sc/ug0j67).
 We are going to use [Jenkins](https://jenkins. io) as automation server.
 The central document is the `Jenkinsfile` which will contain the definition of the pipeline with its multiple stages.

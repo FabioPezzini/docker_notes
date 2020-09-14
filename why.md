@@ -1,4 +1,3 @@
-# Why use Docker?
 In the old days, developers would develop a new application. Once that application
 was completed in their eyes, they would hand that application over to the operations
 engineers, who were then supposed to install it on the production servers and get it
@@ -49,7 +48,6 @@ a container as easily as saying 1, 2, 3.
 Somebody once said that, today, every company of a certain size has to acknowledge
 that they need to be a software company. In this sense, a modern bank is a software
 company that happens to specialize in the business of finance. Software runs all businesses.
-
 ### Architecture
 There are three essential parts:
 - On the bottom, we have the Linux operating system

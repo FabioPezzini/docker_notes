@@ -1,4 +1,3 @@
-# Docker
 Docker is a Container managing software. Containers or in general Container based virtualization uses the kernel on the host's OS to tun multiple guest istances. Each guest istance is called a container, and each container has its own:
 - root fs
 - processes

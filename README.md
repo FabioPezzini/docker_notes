@@ -6,3 +6,5 @@
 - [Image management (Dockerfiles and other)](images.md)
 - [Data Volumes (Stateful container)](data_volumes.md)
 - [Useful and advanced commands](useful_commands.md)
+- [Docker automation for CI/CD (Introductions to Jenkins)](automation.md)
+- [Orchestrate containers on single Docker host (Docker Compose)](compose.md)
