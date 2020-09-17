@@ -157,3 +157,9 @@ Stopped containers can waste precious resources, you should remove them.
 docker container prune ContainerName
 ```
 
+## Attach the container to a specific network
+```sh
+docker container run --name c3 -d --network sample-net alpine:latest
+```
+NB = We can attach more than one network to a single container
+
