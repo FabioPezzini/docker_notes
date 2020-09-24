@@ -9,3 +9,4 @@
 - [Docker automation for CI/CD (Introductions to Jenkins)](automation.md)
 - [Docker Networking on a single host (Theory)](network.md)
 - [Orchestrate containers on single Docker host (Docker Compose)](compose.md)
+- [Docker's native orchestrator (Docker Swarm)](swarm.md)

@@ -39,6 +39,13 @@ This flag override the existing entrypoint set in an image
 ```sh
 docker container run -it --entrypoint /bin/sh ContainerName
 ```
+### -it parameter
+To run and maintain up a container we can do:
+-i flag signifies that we want to run the additional process interactively. 
+-t tells Docker that we want it to provide us with a TTY.
+```sh
+docker container run -it -d ubuntu
+```
 
 ## Check status of containers
 Check only the status of the running containers
